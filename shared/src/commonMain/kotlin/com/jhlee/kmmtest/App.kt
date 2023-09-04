@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 @Composable
 fun App() {
     Column {
-        Text(text = "text")
+        SharedRes.strings.hello_world
+        Text(text = "${getString(SharedRes.strings.hello_world)} : 11")
     }
 }

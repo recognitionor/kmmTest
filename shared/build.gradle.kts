@@ -4,6 +4,7 @@ plugins {
 
     id("org.jetbrains.compose")
     id("com.squareup.sqldelight")
+    id("dev.icerock.mobile.multiplatform-resources")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class) kotlin {
@@ -27,9 +28,8 @@ plugins {
     ).forEach {
         it.binaries.framework {
             baseName = "shared"
-            isStatic = true
-//            export("dev.icerock.moko:resources:0.22.3")
-//            export("dev.icerock.moko:graphics:0.9.0")
+            export("dev.icerock.moko:resources:0.23.0")
+            export("dev.icerock.moko:graphics:0.9.0")
         }
     }
 
@@ -46,6 +46,7 @@ plugins {
                 implementation("com.squareup.sqldelight:runtime:1.5.5")
                 implementation("com.squareup.sqldelight:coroutines-extensions:1.5.5")
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
+                api("dev.icerock.moko:resources:0.23.0")
             }
         }
         val commonTest by getting {
@@ -93,6 +94,10 @@ android {
     }
 }
 
+multiplatformResources {
+    multiplatformResourcesPackage = "com.jhlee.kmmtest"
+    multiplatformResourcesClassName = "SharedRes"
+}
 
 sqldelight {
     database("ContactDatabase") {
