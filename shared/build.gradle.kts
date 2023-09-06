@@ -1,8 +1,10 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+
     id("org.jetbrains.compose")
     id("com.squareup.sqldelight")
+    id("dev.icerock.mobile.multiplatform-resources")
 }
 
 kotlin {
@@ -19,15 +21,14 @@ kotlin {
             export("dev.icerock.moko:mvvm-core:0.16.1")
         }
     }
-    
+
     listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
+        iosX64(), iosArm64(), iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
             baseName = "shared"
-            isStatic = true
+            export("dev.icerock.moko:resources:0.23.0")
+            export("dev.icerock.moko:graphics:0.9.0")
         }
     }
 
@@ -38,12 +39,16 @@ kotlin {
                 implementation(compose.foundation)
                 implementation(compose.material3)
                 implementation(compose.materialIconsExtended)
-                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-                implementation(compose.components.resources)
+                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class) implementation(
+                    compose.components.resources
+                )
 
                 implementation("com.squareup.sqldelight:runtime:1.5.5")
                 implementation("com.squareup.sqldelight:coroutines-extensions:1.5.5")
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")            }
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
+                api("dev.icerock.moko:resources:0.23.0")
+            }
+
         }
         val commonTest by getting {
             dependencies {
@@ -93,10 +98,14 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 }
+multiplatformResources {
+    multiplatformResourcesPackage = "com.jhlee.kmmtest"
+    multiplatformResourcesClassName = "SharedRes"
+}
 
 sqldelight {
-    database("ContactDatabase") {
-        packageName = "com.plcoding.contactscomposemultiplatform.database"
+    database("TestDatabase") {
+        packageName = "com.jhlee.kmmtest"
         sourceFolders = listOf("sqldelight")
     }
 }
