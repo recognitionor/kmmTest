@@ -23,6 +23,4 @@ actual class AppModule(
     actual val remoteCoinDataSource: CoinDataSource by lazy {
         RemoteCoinDataSource(KtorClientFactory.build())
     }
-    actual val dbCoinDataSource: CoinDataSource
-        get() = TODO("Not yet implemented")
 }
