@@ -10,7 +10,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -20,7 +19,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.jhlee.kmmtest.core.util.Logger
 import com.jhlee.kmmtest.di.AppModule
 import dev.icerock.moko.mvvm.compose.getViewModel
 import dev.icerock.moko.mvvm.compose.viewModelFactory
@@ -33,7 +31,7 @@ fun TestScreen(appModule: AppModule) {
     }
 
     val viewModel = getViewModel(key = "test-list-screen",
-        factory = viewModelFactory { TestListViewModel(appModule.testDataSource) })
+        factory = viewModelFactory { TestListViewModel(appModule.dbTestDataSource) })
 
     val state by viewModel.state.collectAsState()
 

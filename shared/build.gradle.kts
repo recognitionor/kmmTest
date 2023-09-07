@@ -5,9 +5,11 @@ plugins {
     id("org.jetbrains.compose")
     id("com.squareup.sqldelight")
     id("dev.icerock.mobile.multiplatform-resources")
+    kotlin("plugin.serialization") version "1.5.10"
 }
 
-kotlin {
+@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class) kotlin {
+
     android {
         compilations.all {
             kotlinOptions {
@@ -33,22 +35,35 @@ kotlin {
     }
 
     sourceSets {
+        val ktorVersion = "2.3.0"
         val commonMain by getting {
             dependencies {
                 implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.material3)
                 implementation(compose.materialIconsExtended)
-                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class) implementation(
-                    compose.components.resources
-                )
+                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+                implementation(compose.components.resources)
+
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
 
                 implementation("com.squareup.sqldelight:runtime:1.5.5")
                 implementation("com.squareup.sqldelight:coroutines-extensions:1.5.5")
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
                 api("dev.icerock.moko:resources:0.23.0")
-            }
 
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("io.ktor:ktor-client-serialization:$ktorVersion")
+
+                implementation("io.ktor:ktor-client-logging:$ktorVersion")
+
+                implementation("io.github.aakira:napier:2.6.1")
+
+                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1") // 버전은 적절히 선택
+
+            }
         }
         val commonTest by getting {
             dependencies {
@@ -57,9 +72,12 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
+                implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
                 implementation("com.squareup.sqldelight:android-driver:1.5.5")
                 implementation("androidx.appcompat:appcompat:1.6.1")
                 implementation("androidx.activity:activity-compose:1.7.2")
+                implementation("io.ktor:ktor-client-android:$ktorVersion")
+
             }
         }
         val androidUnitTest by getting
@@ -69,6 +87,7 @@ kotlin {
         val iosMain by creating {
             dependencies {
                 implementation("com.squareup.sqldelight:native-driver:1.5.5")
+                implementation("io.ktor:ktor-client-darwin:$ktorVersion")
             }
             dependsOn(commonMain)
             iosX64Main.dependsOn(this)
@@ -98,6 +117,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 }
+
 multiplatformResources {
     multiplatformResourcesPackage = "com.jhlee.kmmtest"
     multiplatformResourcesClassName = "SharedRes"

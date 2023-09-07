@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.supervisorScope
 import com.jhlee.kmmtest.TestDatabase
 
-class SqlDelightTestDataSource(
+class DBTestDataSource(
     db: TestDatabase
 ) : TestDataSource {
     private val queries = db.testQueries

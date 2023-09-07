@@ -21,7 +21,7 @@ class TestListViewModel(private val testDataSource: TestDataSource) : ViewModel(
     fun onEvent(event: TestEvent) {
         when (event) {
             TestEvent.OnTestClick -> {
-                Logger().log("test")
+                Logger.log("test")
                 viewModelScope.launch {
                     testDataSource.insertTest(Test(0, "test"))
                 }
