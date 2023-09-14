@@ -35,6 +35,10 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                with(Deps.Koin) {
+                    api(core)
+                    api(test)
+                }
                 implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.material3)
