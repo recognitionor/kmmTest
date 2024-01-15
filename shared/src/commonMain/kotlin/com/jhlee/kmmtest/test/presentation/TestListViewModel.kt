@@ -13,10 +13,7 @@ import kotlinx.coroutines.launch
 class TestListViewModel(private val testDataSource: TestDataSource) : ViewModel() {
 
     private val _state = MutableStateFlow(TestListState())
-
-    val state = combine(_state, testDataSource.getTestList()) { state, testList ->
-        state.copy(testList = testList)
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), TestListState())
+    val state = _state.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), _state.value)
 
     fun onEvent(event: TestEvent) {
         when (event) {

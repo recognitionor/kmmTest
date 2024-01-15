@@ -1,6 +1,7 @@
 package com.jhlee.kmmtest.core.data
 
-import com.squareup.sqldelight.db.SqlDriver
+import app.cash.sqldelight.db.SqlDriver
+
 
 expect class DatabaseDriverFactory {
     fun create(): SqlDriver
