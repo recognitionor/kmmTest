@@ -1,4 +1,4 @@
-CREATE TABLE testEntity (
+CREATE TABLE IF NOT EXISTS testEntity (
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL
 );
@@ -11,8 +11,9 @@ ORDER BY id ASC;
 insertTestEntity:
 INSERT OR REPLACE
 INTO testEntity(
-    name
-) VALUES (?);
+    name,
+    count
+) VALUES (?, ?);
 
 deleteTest:
 DELETE FROM testEntity

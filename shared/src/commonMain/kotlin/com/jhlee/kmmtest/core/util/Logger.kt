@@ -1,5 +1,5 @@
 package com.jhlee.kmmtest.core.util
 
-expect class Logger() {
+expect object Logger {
     fun log(message: String)
 }

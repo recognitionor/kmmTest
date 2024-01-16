@@ -6,7 +6,9 @@ import com.jhlee.kmmtest.test.data.SqlDelightTestDataSource
 import com.jhlee.kmmtest.test.domain.TestDataSource
 
 actual class AppModule {
+    init {
 
+    }
     actual val testDataSource: TestDataSource by lazy {
         SqlDelightTestDataSource(
             db = TestDatabase(

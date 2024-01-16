@@ -1,32 +1,37 @@
 package com.jhlee.kmmtest.test.data
 
-import app.cash.sqldelight.coroutines.asFlow
-import app.cash.sqldelight.coroutines.mapToList
+import com.jhlee.kmmtest.TestDatabase
+import com.jhlee.kmmtest.core.domain.Resource
+import com.jhlee.kmmtest.core.util.Logger
 import com.jhlee.kmmtest.test.domain.Test
 import com.jhlee.kmmtest.test.domain.TestDataSource
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.supervisorScope
-import com.jhlee.kmmtest.TestDatabase
-import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.flow.flow
 
 class SqlDelightTestDataSource(
     db: TestDatabase,
 ) : TestDataSource {
     private val queries = db.testQueries
 
-    override suspend fun getTestList(): Flow<List<Test>> {
-        return queries.getTestList().asFlow().mapToList(currentCoroutineContext()).map { testList ->
-            supervisorScope {
-                testList.map {
-                    async { it.toTest() }
-                }.map { it.await() }
-            }
-        }
+    override fun getTestList(): Flow<Resource<List<Test>>> = flow {
+        emit(Resource.Loading())
+        val list = queries.getTestList().executeAsList()
+//        val list2 = queries.getTestList2().executeAsList()
+        Logger.log("list : ${list}")
+//        Logger.log("list2 : $list2")
+        emit(Resource.Success(list.map { it.toTest() }))
     }
 
-    override suspend fun insertTest(test: Test) {
-        queries.insertTestEntity(test.name)
+    override fun insertTest(test: Test): Flow<Resource<Unit>> = flow {
+        queries.insertTestEntity(test.name, 9)
+//        queries.insertTest(test.name)
+        emit(Resource.Success(Unit))
+    }
+
+    override fun deleteTest(test: Test): Flow<Resource<Unit>> = flow {
+        test.id?.let {
+            queries.deleteTest(it)
+        }
+        emit(Resource.Success(Unit))
     }
 }

@@ -1,8 +1,10 @@
 package com.jhlee.kmmtest.test.domain
 
+import com.jhlee.kmmtest.core.domain.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface TestDataSource {
-    suspend fun getTestList(): Flow<List<Test>>
-    suspend fun insertTest(test: Test)
+    fun getTestList(): Flow<Resource<List<Test>>>
+    fun insertTest(test: Test): Flow<Resource<Unit>>
+    fun deleteTest(test: Test): Flow<Resource<Unit>>
 }

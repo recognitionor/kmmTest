@@ -26,6 +26,7 @@ plugins {
 
     sourceSets {
         val ktorVersion = "2.3.2-eap-692"
+
         val commonMain by getting {
             dependencies {
                 implementation(compose.runtime)
@@ -128,10 +129,9 @@ sqldelight {
         create("TestDatabase") {
             packageName.set("com.jhlee.kmmtest")
 
-//            dialect("app.cash.sqldelight:mysql-dialect:2.0.0")
             verifyMigrations.set(true)
             deriveSchemaFromMigrations.set(true)
-            migrationOutputFileFormat.set("sql")
+            migrationOutputFileFormat.set(".sqm")
             migrationOutputDirectory.set(file("sqldelight/migrations"))
         }
     }
