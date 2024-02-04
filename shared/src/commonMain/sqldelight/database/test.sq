@@ -12,9 +12,22 @@ insertTestEntity:
 INSERT OR REPLACE
 INTO testEntity(
     name,
-    count
-) VALUES (?, ?);
+    count,
+    max
+) VALUES (?, ?, ?);
 
 deleteTest:
 DELETE FROM testEntity
 WHERE id = :id;
+
+insertPlayer:
+INSERT OR REPLACE
+INTO Player(
+    id,
+    position
+) VALUES (?, ?);
+
+getPlayerList:
+SELECT *
+FROM Player
+ORDER BY id ASC;

@@ -4,7 +4,7 @@ import com.jhlee.kmmtest.test.domain.Test
 import migrations.TestEntity
 
 suspend fun TestEntity.toTest(): Test {
-    return Test(id = id, name = name)
+    return Test(id = id, name = name, number = number.toInt())
 }
 //import migrations.TestEntity2
 

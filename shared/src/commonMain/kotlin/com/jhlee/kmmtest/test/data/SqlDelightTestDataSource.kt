@@ -16,14 +16,18 @@ class SqlDelightTestDataSource(
     override fun getTestList(): Flow<Resource<List<Test>>> = flow {
         emit(Resource.Loading())
         val list = queries.getTestList().executeAsList()
+        val testList = queries.getPlayerList().executeAsList()
 //        val list2 = queries.getTestList2().executeAsList()
-        Logger.log("list : ${list}")
+        Logger.log("list : $list")
+        Logger.log("testList : $testList")
+
 //        Logger.log("list2 : $list2")
         emit(Resource.Success(list.map { it.toTest() }))
     }
 
     override fun insertTest(test: Test): Flow<Resource<Unit>> = flow {
-        queries.insertTestEntity(test.name, 9)
+        queries.insertTestEntity(test.name, 9, 1000)
+        queries.insertPlayer(0, "MF")
 //        queries.insertTest(test.name)
         emit(Resource.Success(Unit))
     }
