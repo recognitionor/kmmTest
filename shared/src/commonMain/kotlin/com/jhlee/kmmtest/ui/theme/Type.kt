@@ -1,4 +1,4 @@
-package com.mocoding.pokedex.ui.theme
+package com.jhlee.kmmtest.ui.theme
 
 //import androidx.compose.material3.Typography
 import androidx.compose.material3.Typography

@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.jhlee.kmmtest.ui.root.RootComponent
 import com.jhlee.kmmtest.ui.root.RootContent
-import com.mocoding.pokedex.ui.theme.PokedexTheme
+import com.jhlee.kmmtest.ui.theme.PokedexTheme
 
 @Composable
 fun ContentView(component: RootComponent) {

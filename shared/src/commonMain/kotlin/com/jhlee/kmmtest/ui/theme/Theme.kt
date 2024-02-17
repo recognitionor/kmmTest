@@ -1,4 +1,4 @@
-package com.mocoding.pokedex.ui.theme
+package com.jhlee.kmmtest.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

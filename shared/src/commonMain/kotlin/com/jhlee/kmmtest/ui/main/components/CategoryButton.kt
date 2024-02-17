@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.mocoding.pokedex.ui.main.state.CategoryState
-import com.mocoding.pokedex.ui.theme.Black
+import com.jhlee.kmmtest.ui.theme.Black
 
 @Composable
 internal fun CategoryButton(

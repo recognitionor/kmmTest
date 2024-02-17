@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.jhlee.kmmtest.core.model.Video
-import com.mocoding.pokedex.ui.theme.Black
+import com.jhlee.kmmtest.ui.theme.Black
 
 @Composable
 internal fun VideoItem(

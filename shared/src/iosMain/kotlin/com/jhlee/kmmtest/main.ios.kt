@@ -12,11 +12,10 @@ import androidx.compose.ui.window.ComposeUIViewController
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
-import com.jhlee.kmmtest.core.di.initKoin
 import com.jhlee.kmmtest.ui.ContentView
 import com.jhlee.kmmtest.ui.helper.LocalSafeArea
 import com.jhlee.kmmtest.ui.root.RootComponent
-import com.mocoding.pokedex.ui.theme.PokedexTheme
+import com.jhlee.kmmtest.ui.theme.PokedexTheme
 import platform.UIKit.*
 
 @Suppress("unused", "FunctionName")

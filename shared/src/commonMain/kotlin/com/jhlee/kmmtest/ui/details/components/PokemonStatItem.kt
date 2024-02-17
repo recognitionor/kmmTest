@@ -16,8 +16,8 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.jhlee.kmmtest.core.model.PokemonInfo
-import com.mocoding.pokedex.ui.theme.Green300
-import com.mocoding.pokedex.ui.theme.Yellow400
+import com.jhlee.kmmtest.ui.theme.Green300
+import com.jhlee.kmmtest.ui.theme.Yellow400
 import kotlin.math.roundToInt
 
 @Composable
