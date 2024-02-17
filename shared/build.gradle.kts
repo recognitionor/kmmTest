@@ -165,3 +165,11 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 }
+
+sqldelight {
+    databases {
+        create("PokemonDatabase") {
+            packageName.set("com.jhlee.kmmtest.core.database")
+        }
+    }
+}
